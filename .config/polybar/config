@@ -1,0 +1,321 @@
+; POLYBAR CONFIG
+; By u/prmsrswt
+
+[bar/bar-top]
+
+; Dimensions
+width = 100%
+height = 25
+offset-y = 0
+offset-x = 0
+border-top-size = 0
+border-bottom-size = 0
+border-right-size = 0
+border-left-size = 0
+
+; Location
+bottom = false
+; monitor = eDP-1
+wm-restack = none
+override-redirect = false
+
+; Fonts
+font-0 = Hack:size=10;2
+font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=9;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=9;1"
+font-3 = "Font Awesome 5 Brands:pixelsize=9;1"
+font-4 = Ionicons:size=12;2
+
+; Colors
+background = #8b000000
+foreground = #d0b7ff
+border-color = 0
+
+; Misc
+fixed-center = true
+padding-left = 2 
+padding-right = 2
+module-margin = 1
+tray-position = none
+tray-detached = true
+
+; Modules
+modules-left = powermenu volume mpd
+modules-center = mpd2
+modules-right = wlan network battery date time
+
+[bar/bar-bottom]
+inherit = bar/bar-top
+
+background = #8b000000
+; Location
+bottom = true
+; Dimensions
+width = 100%
+height = 25
+
+tray-position = right
+tray-detached = false
+
+
+; Modules
+modules-left = i3
+modules-center = null
+modules-right = compton
+
+[bar/bottom]
+inherit = bar/bar-top
+
+background = #8b000000
+; Location
+bottom = true
+; Dimensions
+width = 100%
+height = 25
+
+tray-position = right
+tray-detached = false
+
+
+; Modules
+modules-left = mpd
+modules-center = mpd2
+modules-right = battery
+
+[module/i3]
+type = internal/i3
+
+ws-icon-0 = 1: term;
+ws-icon-1 = 2: web;
+ws-icon-2 = 3: code;
+ws-icon-3 = 4: files;
+ws-icon-4 = 5: steam;
+ws-icon-5 = 6: media;
+ws-icon-6 = 7: chat;
+ws-icon-7 = 8: WS8;
+ws-icon-8 = 9: WS9;
+ws-icon-9 = 10: music;
+pin-workspaces = true
+strip-wsnumbers = true
+enable-scroll = true
+
+
+
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %icon% %name%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+;label-unfocused = %index%
+label-unfocused-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+;label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+;label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 1
+
+
+[module/time]
+type = internal/date
+
+interval = 1.0
+
+date =  %H:%M
+
+[module/date]
+type = internal/date
+date =  %e %B
+label = %date%
+
+
+[module/battery]
+type = internal/battery
+
+battery = BAT1
+
+poll-interval = 1
+
+full-at = 95
+
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+format-charging = <animation-charging> <label-charging>
+animation-charging-0 = 
+animation-charging-font = 5
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-font = 5
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+format-muted =  0%
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/mpd]
+type = internal/mpd
+
+label-offline = mpd is offline
+format-online = <icon-prev> <toggle> <icon-next>  <bar-progress>
+;format-online = <icon-prev> <toggle> <icon-next> <bar-progress>
+format-offline = <label-offline>
+host = 127.0.0.1
+port = 6600
+
+; pause-  play- 
+
+icon-prev = 
+;icon-stop = 
+;icon-play = 
+;icon-pause = 
+icon-next = 
+
+icon-play = 
+icon-play-font = 5
+icon-pause     = 
+icon-pause-font = 5
+icon-stop      = 
+;icon-prev      = 
+;icon-next      = 
+icon-seekb     = 
+icon-seekf     = 
+icon-random    = 
+icon-repeat    = 
+icon-repeatone =  1
+
+; ─ ▒ ▩ ■ 5: 
+bar-progress-width = 15
+bar-progress-indicator = 
+bar-progress-fill = 
+bar-progress-fill-font = 5
+bar-progress-empty = 
+bar-progress-empty-font = 5
+
+[module/mpd2]
+type = internal/mpd
+
+label-offline = mpd is offline
+format-online = <label-song>
+label-song    =  %title% - %artist%
+format-offline = <label-offline>
+host = 127.0.0.1
+port = 6600
+
+label-song-maxlen = 28
+label-song-ellipsis = true
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = radeon_bl0
+
+format = <ramp> <label>
+
+label = %percentage%%
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+[module/wlan]
+type = internal/network
+; use your wifi interface's name (ex. wlan0)
+interface = wlp2s0
+interval = 5
+label-connected =  %essid%
+label-disconnected =  Not Connected
+
+[module/cpu]
+type = internal/cpu
+label =  %percentage%%
+
+
+[module/memory]
+type = internal/memory
+label =  %gb_used%
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+label-connected =  %downspeed%
+; |  %upspeed%
+
+[module/powermenu]
+type = custom/menu
+format-spacing = 1
+label-open =  
+label-close = 
+label-separator = |
+menu-0-0 = 
+menu-0-0-exec = menu-open-1
+menu-0-1 =  
+menu-0-1-exec = menu-open-2
+menu-1-0 = No
+menu-1-0-exec = menu-open-0
+menu-1-1 = Yes
+menu-1-1-exec = reboot
+menu-2-0 = Yes
+menu-2-0-exec = shutdown now
+menu-2-1 = No
+menu-2-1-exec = menu-open-0
+
+[module/compton]
+type = custom/script
+exec = ~/.config/polybar/scripts/compton.sh
+interval = 5
+click-left = ~/.config/polybar/scripts/compton.sh --toggle
